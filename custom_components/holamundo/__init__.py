@@ -1,6 +1,6 @@
 import logging
 from .const import DOMAIN, DEFAULT_BASE_URL, DEFAULT_REFRESH
-from ...validator import SensorValidator
+from .validator import SensorValidator
 
 _LOGGER = logging.getLogger(__name__)
 
