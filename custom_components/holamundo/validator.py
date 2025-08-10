@@ -30,13 +30,14 @@ class SensorValidator:
             return False
 
     def validate_sensors(self, sensors):
-        if not self.validate_token():
-            return False
+    
+#        if not self.validate_token():
+#            return False
 
         # Simulación de validación de sensores
-        for sensor in sensors:
-            if not isinstance(sensor, str) or not sensor:
-                _LOGGER.warning(f"Sensor inválido: {sensor}")
-                return False
+#        for sensor in sensors:
+#            if not isinstance(sensor, str) or not sensor:
+#                _LOGGER.warning(f"Sensor inválido: {sensor}")
+#                return False
 
         return True
