@@ -1,9 +1,10 @@
 {
   "domain": "holamundo",
-  "name": "Hola Mundo",
-  "version": "1.0.1 ",
-  "documentation": "https://github.com/estebanbuchner/holamundo",
-  "requirements": [],
+  "name": "Hola Mundo Sensor",
+  "version": "1.2.0",
+  "documentation": "https://github.com/tuusuario/holamundo",
   "dependencies": [],
-  "codeowners": ["@estebanbuchner"]
+  "codeowners": ["@tuusuario"],
+  "requirements": [],
+  "config_flow": false
 }
