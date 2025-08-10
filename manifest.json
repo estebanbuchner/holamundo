@@ -1,0 +1,9 @@
+{
+    "domain": "holamundo",
+    "name": "Hola Mundo",
+    "version": "1.0.0",
+    "documentation": "https://github.com/estebanbuchner/holamundo",
+    "issue_tracker": "https://github.com/estebanbuchner/holamundo/issues",
+    "codeowners": ["@estebanbuchner"],
+    "config_flow": true
+  }
