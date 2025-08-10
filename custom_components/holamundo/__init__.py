@@ -9,7 +9,7 @@ def setup(hass, config):
     token = conf.get("api_token")
     base_url = conf.get("base_url", DEFAULT_BASE_URL)
     refresh = conf.get("refresh", DEFAULT_REFRESH)
-    sensors = conf.get("sensors", [])
+    sensors = ["Fecha","Hora"]
 
     if not token:
         _LOGGER.error("api_token no definido en configuration.yaml")
@@ -28,4 +28,5 @@ def setup(hass, config):
     }
 
     return True
+
 

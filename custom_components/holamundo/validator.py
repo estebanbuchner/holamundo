@@ -20,10 +20,11 @@ class SensorValidator:
 
         try:
             response = requests.get(
-                f"{self.base_url}/validate",
+                f"{self.base_url}/config",
                 headers={"Authorization": f"Bearer {self.token}"},
                 timeout=5
             )
+            _LOGGER.debug(f"validate_token {response.status_code } ")
             return response.status_code == 200
         except requests.RequestException as e:
             _LOGGER.error(f"Error al validar token: {e}")
@@ -31,13 +32,17 @@ class SensorValidator:
 
     def validate_sensors(self, sensors):
     
-#        if not self.validate_token():
-#            return False
+        _LOGGER.debug("validate_sensors")
+
+        if not self.validate_token():
+            return False
+        
+        _LOGGER.debug("validate_token okl")
 
         # Simulación de validación de sensores
-#        for sensor in sensors:
-#            if not isinstance(sensor, str) or not sensor:
-#                _LOGGER.warning(f"Sensor inválido: {sensor}")
-#                return False
+        for sensor in sensors:
+            if not isinstance(sensor, str) or not sensor:
+                _LOGGER.warning(f"Sensor inválido: {sensor}")
+                return False
 
         return True
