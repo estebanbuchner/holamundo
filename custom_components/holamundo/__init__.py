@@ -1,5 +1,5 @@
 import logging
-from .const import DOMAIN, DEFAULT_BASE_URL, DEFAULT_REFRESH
+from .const import DOMAIN, DEFAULT_BASE_URL, DEFAULT_REFRESH, SENSOR_FECHA, SENSOR_HORA , SENSOR_DIA
 from .validator import SensorValidator
 
 _LOGGER = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ def setup(hass, config):
     token = conf.get("api_token")
     base_url = conf.get("base_url", DEFAULT_BASE_URL)
     refresh = conf.get("refresh", DEFAULT_REFRESH)
-    sensors = ["Fecha","Hora"]
+    sensors = [SENSOR_FECHA,SENSOR_HORA,SENSOR_DIA]
 
     if not token:
         _LOGGER.error("api_token no definido en configuration.yaml")

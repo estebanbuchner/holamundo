@@ -7,22 +7,21 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import HomeAssistantType, ConfigType
 from homeassistant.helpers.event import async_track_time_interval
 
-from .const import DOMAIN
+from .const import DOMAIN, SENSOR_FECHA, SENSOR_HORA , SENSOR_DIA
 
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_platform(hass: HomeAssistantType, config: ConfigType, async_add_entities: AddEntitiesCallback, discovery_info=None):
     data = hass.data[DOMAIN]
     refresh = data.get("refresh", 10)
-#    sensors = data.get("sensors", [])
-#
-#    entities = [HolaMundoSensor(sensor, refresh) for sensor in sensors]
-    entities = [HolaMundoSensorFecha( refresh), HolaMundoSensorHora( refresh) ]
+    entities = [HolaMundoSensorFecha( refresh), HolaMundoSensorHora( refresh), HolaMundoSensorDia( refresh)  ]
     async_add_entities(entities, update_before_add=True)
 
-class HolaMundoSensorFecha(SensorEntity):
-    def __init__(self, refresh):
-        self._name = "Fecha"
+
+
+class HolaMundoBaseSensor(SensorEntity):
+    def __init__(self, name, refresh):
+        self._name = name
         self._state = None
         self._refresh = refresh
 
@@ -34,40 +33,39 @@ class HolaMundoSensorFecha(SensorEntity):
     def state(self):
         return self._state
 
+    async def async_added_to_hass(self):
+        async_track_time_interval(
+            self.hass,
+            lambda now: self.async_schedule_update_ha_state(True),
+            timedelta(seconds=self._refresh)
+        )
+
+class HolaMundoSensorHora(HolaMundoBaseSensor):
+    def __init__(self, refresh):
+        super().__init__(SENSOR_HORA, refresh)
+
     async def async_update(self):
         now = datetime.now()
-        
+        self._state = now.strftime("%H:%M:%S")
+
+
+class HolaMundoSensorFecha(HolaMundoBaseSensor):
+    def __init__(self, refresh):
+        super().__init__(SENSOR_FECHA, refresh)
+
+    async def async_update(self):
+        now = datetime.now()
         fecha = now.strftime("%Y-%m-%d")
         dia = now.strftime("%A")
-        self._state = f"{fecha} ({dia})"
+        self._state = f"{fecha}"
 
-    async def async_added_to_hass(self):
-        async_track_time_interval(
-            self.hass, lambda now: self.async_schedule_update_ha_state(True),
-            timedelta(self._refresh)
-        )
 
-class HolaMundoSensorHora(SensorEntity):
+class HolaMundoSensorDia(HolaMundoBaseSensor):
     def __init__(self, refresh):
-        self._name = "Hora"
-        self._state = None
-        self._refresh = refresh
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def state(self):
-        return self._state
+        super().__init__(SENSOR_DIA, refresh)
 
     async def async_update(self):
         now = datetime.now()
-        hora = now.strftime("%H:%M:%S") 
-        self._state = f"{hora}"
-    
-    async def async_added_to_hass(self):
-        async_track_time_interval(
-            self.hass, lambda now: self.async_schedule_update_ha_state(True),
-            timedelta(self._refresh)
-        )
+       
+        dia = now.strftime("%A")
+        self._state = f"({dia})"
