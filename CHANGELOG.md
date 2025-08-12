@@ -14,3 +14,9 @@
 
 ### Configurable
 - Activación condicional de `HoraDiaSensor` desde `configuration.yaml` con `mostrar_hora_dia: true`
+
+## [v1.3.8] - 2025-08-12
+
+### Changed
+- Reemplazo de `HomeAssistantType` por `HomeAssistant` para compatibilidad con HA Core 2025.5
+- Eliminado `ConfigType` obsoleto, reemplazado por `dict` en `async_setup_platform`
