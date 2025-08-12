@@ -1,6 +1,6 @@
 # Hola Mundo Sensor para Home Assistant
 
-Este componente personalizado para Home Assistant crea sensores que muestran un saludo, la fecha, la hora y el día de la semana. Además, permite validar sensores configurados y parametrizar el token, el endpoint y el intervalo de actualización.
+Este componente personalizado para Home Assistant crea sensores que muestran un saludo, la fecha, la hora y el día de la semana. Además, permite parametrizar el token, el endpoint y el intervalo de actualización.
 
 ---
 
@@ -16,21 +16,25 @@ Este componente personalizado para Home Assistant crea sensores que muestran un 
 ---
 
 ## ⚙️ Configuración.yaml
+
+```yaml
+sensor:
+  - platform: holamundo
 holamundo:
-api_token: !secret holamundo_token
-base_url: http://hatest.local:8123/
-refresh: 15
-sensors:
- - saludo
- - reloj
+  api_token: !secret holamundo_token
+  base_url: http://hatest.local:8123/
+  refresh: 15
 
 
-Parámetros
-Parámetro	Tipo	Descripción	Default
-api_token	string	Token de autenticación para validar sensores	obligatorio
-base_url	string	URL base del endpoint de validación	http://hatest.local:8123/
-refresh	integer	Intervalo de actualización en segundos	10
-sensors	lista	Lista de nombres de sensores a crear	[]
+
+
+| Configuración | Descripción                            |
+|---------------|----------------------------------------|
+| `refresh`     | Intervalo de actualización en segundos |
+| `base_url`    | URL base de Home Assistant             |
+| `api_token`   | Token de autenticación                 |
+
+
 
 
 🧪 Validación de sensores
@@ -44,9 +48,3 @@ Nombres de sensores definidos
 
 Los errores se loguean en el registro de Home Assistant.
 
-🔄 Scripts útiles
-validate_sensors.py
-Valida que los sensores estén activos y configurados correctamente.
-
-revert_hora_dia.sh
-Desactiva el sensor de hora y día comentando la línea en configuration.yaml.
