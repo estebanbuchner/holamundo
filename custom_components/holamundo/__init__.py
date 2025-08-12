@@ -11,9 +11,6 @@ def setup(hass, config):
     refresh = conf.get("refresh", DEFAULT_REFRESH)
     switch_file =  conf.get("switch_file", "/config/holamundo_switch_state.txt")
     
-    return True
-
-
     sensors = [SENSOR_FECHA,SENSOR_HORA,SENSOR_DIA]
 
     if not token:
