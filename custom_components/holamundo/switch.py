@@ -12,7 +12,7 @@ async def async_setup_platform(hass: HomeAssistant, config: dict, async_add_enti
     file_path = data.get("switch_file", "/config/holamundo_switch_state.txt")
     refresh = data.get("refresh", 10)
 
-    async_add_entities([HolaMundoSwitch("Interruptor", file_path, refresh)], update_before_add=True)
+    async_add_entities([HolaMundoSwitch("Interruptor", file_path, refresh),HolaMundoSwitch("Interruptor2", file_path, refresh)], update_before_add=True)
 
 
 class HolaMundoSwitch(SwitchEntity):
