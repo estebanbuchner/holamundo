@@ -9,6 +9,11 @@ def setup(hass, config):
     token = conf.get("api_token")
     base_url = conf.get("base_url", DEFAULT_BASE_URL)
     refresh = conf.get("refresh", DEFAULT_REFRESH)
+    switch_file =  conf.get("switch_file", "/config/holamundo_switch_state.txt")
+    
+    return True
+
+
     sensors = [SENSOR_FECHA,SENSOR_HORA,SENSOR_DIA]
 
     if not token:
@@ -25,6 +30,7 @@ def setup(hass, config):
         "base_url": base_url,
         "refresh": refresh,
         "sensors": sensors,
+        "switch_file": switch_file,
     }
 
     return True

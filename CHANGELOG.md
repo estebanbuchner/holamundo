@@ -20,3 +20,7 @@
 ### Changed
 - Reemplazo de `HomeAssistantType` por `HomeAssistant` para compatibilidad con HA Core 2025.5
 - Eliminado `ConfigType` obsoleto, reemplazado por `dict` en `async_setup_platform`
+
+## [v1.4] - 2025-08-12
+### Added
+- Switch que persiste su estado en archivo local y lo lee en `async_update`
