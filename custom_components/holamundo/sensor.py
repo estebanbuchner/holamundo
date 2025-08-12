@@ -6,6 +6,7 @@ from homeassistant.const import CONF_NAME
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import HomeAssistantType, ConfigType
 from homeassistant.helpers.event import async_track_time_interval
+from homeassistant.core import callback
 
 from .const import DOMAIN, SENSOR_FECHA, SENSOR_HORA , SENSOR_DIA
 
@@ -34,11 +35,21 @@ class HolaMundoBaseSensor(SensorEntity):
         return self._state
 
     async def async_added_to_hass(self):
-        async_track_time_interval(
-            self.hass,
-            lambda now: self.async_schedule_update_ha_state(True),
-            timedelta(seconds=self._refresh)
+        """Register update callback."""
+        self.async_on_remove(
+            async_track_time_interval(
+                self.hass,
+                self._async_update_callback,
+                timedelta(seconds=self._refresh),
+            )
         )
+
+    @callback
+    def _async_update_callback(self, now):
+        """Callback triggered by time interval."""
+        self.async_schedule_update_ha_state(True)
+
+
 
 class HolaMundoSensorHora(HolaMundoBaseSensor):
     def __init__(self, refresh):

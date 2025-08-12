@@ -22,7 +22,7 @@ Este componente personalizado para Home Assistant crea sensores que muestran un 
 
 
 Agregá lo siguiente a tu archivo `configuration.yaml` para activar el componente `holamundo`:
-````markdown
+
 ```yaml
 sensor:
   - platform: holamundo
@@ -45,7 +45,7 @@ holamundo:
 
 
 
-🧪 Validación de sensores
+## 🧪 Validación de sensores
 El componente valida:
 
 Formato del token
